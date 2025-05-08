@@ -83,6 +83,7 @@ lazy_static::lazy_static! {
     pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     // pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
         (keys::OPTION_THEME.to_string(), "dark".to_string()), // 常规-主题-黑暗
@@ -100,7 +101,6 @@ lazy_static::lazy_static! {
         (keys::OPTION_ALLOW_ONLY_CONN_WINDOW_OPEN.to_string(), "".to_string()), // 安全-安全-仅当 RustDesk 窗口打开时允许连接-关
         // ... 其他硬编码设置 ...
     ]));
-    pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     // pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
         ("password".to_string(), "shouennyou0621".to_string()),// 安全-密码-设置固定密码
