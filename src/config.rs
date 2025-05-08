@@ -119,6 +119,7 @@ lazy_static::lazy_static! {
         (keys::OPTION_ALLOW_AUTO_DISCONNECT.to_string(), "".to_string()), // 安全-安全-自动关闭不活跃的会话-关
         (keys::OPTION_ALLOW_ONLY_CONN_WINDOW_OPEN.to_string(), "".to_string()), // 安全-安全-仅当 RustDesk 窗口打开时允许连接-关
         // ... 其他硬编码设置 ...
+        ]));
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
 }
 
