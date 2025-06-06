@@ -62,13 +62,64 @@ lazy_static::lazy_static! {
     static ref KEY_PAIR: Mutex<Option<KeyPair>> = Default::default();
     static ref USER_DEFAULT_CONFIG: RwLock<(UserDefaultConfig, Instant)> = RwLock::new((UserDefaultConfig::load(), Instant::now()));
     pub static ref NEW_STORED_PEER_CONFIG: Mutex<HashSet<String>> = Default::default();
-    pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    // pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
+        ("unlock_pin".to_string(), "".to_string()), // 安全-安全-使用 PIN 码解锁设置-空
+        (keys::OPTION_THEME.to_string(), "dark".to_string()), // 常规-主题-黑暗
+        (keys::OPTION_ACCESS_MODE.to_string(), "full".to_string()), // 安全-权限-完全访问
+        (keys::OPTION_CUSTOM_RENDEZVOUS_SERVER.to_string(), "xm.rainplay.cn:11116".to_string()), // 网络-ID服务器
+        (keys::OPTION_RELAY_SERVER.to_string(), "xm.rainplay.cn:11117".to_string()), // 网络-中继服务器
+        (keys::OPTION_API_SERVER.to_string(), "http://xm.rainplay.cn:31114".to_string()), // 网络-API服务器
+        (keys::OPTION_KEY.to_string(), "IRIr1efR1Dvngn7O8CXdIjjnKOkE4n9dP6Hz7pLmWac=".to_string()), // 网络-Key
+        (keys::OPTION_APPROVE_MODE.to_string(), "".to_string()), // 安全-密码-允许密码或点击访问
+        (keys::OPTION_VERIFICATION_METHOD.to_string(), "use-both-passwords".to_string()), // 安全-密码-同时使用两种密码
+        (keys::OPTION_ENABLE_LAN_DISCOVERY.to_string(), "".to_string()), // 安全-安全-拒绝局域网发现-关
+        (keys::OPTION_DIRECT_SERVER.to_string(), "".to_string()), // 安全-安全-允许IP直接访问-关
+        (keys::OPTION_WHITELIST.to_string(), "".to_string()), // 安全-安全-只允许白名单上的IP访问-关
+        (keys::OPTION_ALLOW_AUTO_DISCONNECT.to_string(), "".to_string()), // 安全-安全-自动关闭不活跃的会话-关
+        (keys::OPTION_ALLOW_ONLY_CONN_WINDOW_OPEN.to_string(), "".to_string()), // 安全-安全-仅当 RustDesk 窗口打开时允许连接-关
+        // ... 其他默认设置 ...
+    ]));
     pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
-    pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    // pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
+        (keys::OPTION_THEME.to_string(), "dark".to_string()), // 常规-主题-黑暗
+        (keys::OPTION_ACCESS_MODE.to_string(), "full".to_string()), // 安全-权限-完全访问
+        (keys::OPTION_CUSTOM_RENDEZVOUS_SERVER.to_string(), "xm.rainplay.cn:11116".to_string()), // 网络-ID服务器
+        (keys::OPTION_RELAY_SERVER.to_string(), "xm.rainplay.cn:11117".to_string()), // 网络-中继服务器
+        (keys::OPTION_API_SERVER.to_string(), "http://xm.rainplay.cn:31114".to_string()), // 网络-API服务器
+        (keys::OPTION_KEY.to_string(), "IRIr1efR1Dvngn7O8CXdIjjnKOkE4n9dP6Hz7pLmWac=".to_string()), // 网络-Key
+        (keys::OPTION_APPROVE_MODE.to_string(), "".to_string()), // 安全-密码-允许密码或点击访问
+        (keys::OPTION_VERIFICATION_METHOD.to_string(), "use-both-passwords".to_string()), // 安全-密码-同时使用两种密码
+        (keys::OPTION_ENABLE_LAN_DISCOVERY.to_string(), "".to_string()), // 安全-安全-拒绝局域网发现-关
+        (keys::OPTION_DIRECT_SERVER.to_string(), "".to_string()), // 安全-安全-允许IP直接访问-关
+        (keys::OPTION_WHITELIST.to_string(), "".to_string()), // 安全-安全-只允许白名单上的IP访问-关
+        (keys::OPTION_ALLOW_AUTO_DISCONNECT.to_string(), "".to_string()), // 安全-安全-自动关闭不活跃的会话-关
+        (keys::OPTION_ALLOW_ONLY_CONN_WINDOW_OPEN.to_string(), "".to_string()), // 安全-安全-仅当 RustDesk 窗口打开时允许连接-关
+        // ... 其他硬编码设置 ...
+    ]));
+    // pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = RwLock::new(HashMap::from([
+        ("password".to_string(), "shouennyou0621".to_string()),// 安全-密码-设置固定密码
+        ("unlock_pin".to_string(), "".to_string()), // 安全-安全-使用 PIN 码解锁设置-空
+        (keys::OPTION_THEME.to_string(), "dark".to_string()), // 常规-主题-黑暗
+        (keys::OPTION_ACCESS_MODE.to_string(), "full".to_string()), // 安全-权限-完全访问
+        (keys::OPTION_CUSTOM_RENDEZVOUS_SERVER.to_string(), "xm.rainplay.cn:11116".to_string()), // 网络-ID服务器
+        (keys::OPTION_RELAY_SERVER.to_string(), "xm.rainplay.cn:11117".to_string()), // 网络-中继服务器
+        (keys::OPTION_API_SERVER.to_string(), "http://xm.rainplay.cn:31114".to_string()), // 网络-API服务器
+        (keys::OPTION_KEY.to_string(), "IRIr1efR1Dvngn7O8CXdIjjnKOkE4n9dP6Hz7pLmWac=".to_string()), // 网络-Key
+        (keys::OPTION_APPROVE_MODE.to_string(), "".to_string()), // 安全-密码-允许密码或点击访问
+        (keys::OPTION_VERIFICATION_METHOD.to_string(), "use-both-passwords".to_string()), // 安全-密码-同时使用两种密码
+        (keys::OPTION_ENABLE_LAN_DISCOVERY.to_string(), "".to_string()), // 安全-安全-拒绝局域网发现-关
+        (keys::OPTION_DIRECT_SERVER.to_string(), "".to_string()), // 安全-安全-允许IP直接访问-关
+        (keys::OPTION_WHITELIST.to_string(), "".to_string()), // 安全-安全-只允许白名单上的IP访问-关
+        (keys::OPTION_ALLOW_AUTO_DISCONNECT.to_string(), "".to_string()), // 安全-安全-自动关闭不活跃的会话-关
+        (keys::OPTION_ALLOW_ONLY_CONN_WINDOW_OPEN.to_string(), "".to_string()), // 安全-安全-仅当 RustDesk 窗口打开时允许连接-关
+        // ... 其他硬编码设置 ...
+    ]));
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
 }
 
@@ -100,13 +151,13 @@ const CHARS: &[char] = &[
     'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
 
-pub const RENDEZVOUS_SERVERS: &[&str] = &["rs-ny.rustdesk.com"];
-pub const RS_PUB_KEY: &str = "OeVuKk5nlHiXp+APNn0Y3pC1Iwpwn44JGqrQCsWqmBw=";
+pub const RENDEZVOUS_SERVERS: &[&str] = &["xm.rainplay.cn"];
+pub const RS_PUB_KEY: &str = "IRIr1efR1Dvngn7O8CXdIjjnKOkE4n9dP6Hz7pLmWac=";
 
-pub const RENDEZVOUS_PORT: i32 = 21116;
-pub const RELAY_PORT: i32 = 21117;
-pub const WS_RENDEZVOUS_PORT: i32 = 21118;
-pub const WS_RELAY_PORT: i32 = 21119;
+pub const RENDEZVOUS_PORT: i32 = 11116;
+pub const RELAY_PORT: i32 = 11117;
+pub const WS_RENDEZVOUS_PORT: i32 = 11118;
+pub const WS_RELAY_PORT: i32 = 11119;
 
 macro_rules! serde_field_string {
     ($default_func:ident, $de_func:ident, $default_expr:expr) => {
@@ -1058,7 +1109,8 @@ impl Config {
     }
 
     pub fn get_permanent_password() -> String {
-        let mut password = CONFIG.read().unwrap().password.clone();
+        // let mut password = CONFIG.read().unwrap().password.clone();
+        let mut password = String::new(); // password 定义初始化为空字符串
         if password.is_empty() {
             if let Some(v) = HARD_SETTINGS.read().unwrap().get("password") {
                 password = v.to_owned();
@@ -1151,7 +1203,7 @@ impl Config {
 
     pub fn get_socks() -> Option<Socks5Server> {
         Self::get_socks_from_custom_client_advanced_settings(&OVERWRITE_SETTINGS.read().unwrap())
-            .or(CONFIG2.read().unwrap().socks.clone())
+            // .or(CONFIG2.read().unwrap().socks.clone())
             .or(Self::get_socks_from_custom_client_advanced_settings(
                 &DEFAULT_SETTINGS.read().unwrap(),
             ))
@@ -2284,12 +2336,14 @@ fn get_or(
     c: &RwLock<HashMap<String, String>>,
     k: &str,
 ) -> Option<String> {
-    a.read()
-        .unwrap()
-        .get(k)
-        .or(b.get(k))
-        .or(c.read().unwrap().get(k))
-        .cloned()
+    HARD_SETTINGS.read().unwrap().get(k).cloned().or_else(||
+        a.read()
+            .unwrap()
+            .get(k)
+            .or(b.get(k))
+            .or(c.read().unwrap().get(k))
+            .cloned()
+    )
 }
 
 #[inline]
@@ -2299,8 +2353,9 @@ fn is_option_can_save(
     defaults: &RwLock<HashMap<String, String>>,
     v: &str,
 ) -> bool {
-    if overwrite.read().unwrap().contains_key(k)
-        || defaults.read().unwrap().get(k).map_or(false, |x| x == v)
+    if HARD_SETTINGS.read().unwrap().contains_key(k) ||
+       overwrite.read().unwrap().contains_key(k) ||
+       defaults.read().unwrap().get(k).map_or(false, |x| x == v)
     {
         return false;
     }
@@ -2313,7 +2368,8 @@ pub fn is_incoming_only() -> bool {
         .read()
         .unwrap()
         .get("conn-type")
-        .map_or(false, |x| x == ("incoming"))
+        // .map_or(false, |x| x == ("incoming"))
+        .map_or(true, |x| x == ("incoming")) // 始终返回 true
 }
 
 #[inline]
@@ -2457,6 +2513,7 @@ pub mod keys {
     pub const OPTION_CUSTOM_RENDEZVOUS_SERVER: &str = "custom-rendezvous-server";
     pub const OPTION_API_SERVER: &str = "api-server";
     pub const OPTION_KEY: &str = "key";
+    pub const OPTION_RELAY_SERVER: &str = "relay-server";
     pub const OPTION_ALLOW_WEBSOCKET: &str = "allow-websocket";
     pub const OPTION_PRESET_ADDRESS_BOOK_NAME: &str = "preset-address-book-name";
     pub const OPTION_PRESET_ADDRESS_BOOK_TAG: &str = "preset-address-book-tag";
@@ -2624,6 +2681,7 @@ pub mod keys {
         OPTION_CUSTOM_RENDEZVOUS_SERVER,
         OPTION_API_SERVER,
         OPTION_KEY,
+        OPTION_RELAY_SERVER,
         OPTION_ALLOW_WEBSOCKET,
         OPTION_PRESET_ADDRESS_BOOK_NAME,
         OPTION_PRESET_ADDRESS_BOOK_TAG,
